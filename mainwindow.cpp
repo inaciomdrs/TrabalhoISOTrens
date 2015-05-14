@@ -5,7 +5,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-// teste 2 3
+// teste 2 3 4
     ui->setupUi(this);
 }
 
