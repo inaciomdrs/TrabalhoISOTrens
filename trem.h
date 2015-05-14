@@ -40,6 +40,8 @@ class Trem: public QThread{
         bool stop;
         QVector<Trilho*> regioesCriticas;
 
+        void mover();
+
 };
 
 #endif // TREM_H
