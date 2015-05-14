@@ -39,9 +39,16 @@ MainWindow::MainWindow(QWidget *parent) :
     // "L" ~> Lado
     // "[D,E]" ~> Direita e Esquerda
 
+    regiao1LD = new Trilho(1124);
+    regiao1LD->setCoordenadaInicial(270,40);
+    regiao1LD->setCoordenadaFinal(290,150);
+
     regiao1B = new Trilho(12);
     regiao1B->setCoordenadaInicial(290,150);
     regiao1B->setCoordenadaFinal(60,150);
+
+    trem1->adicionarRegiaoCritica(regiao1LD);
+    trem1->adicionarRegiaoCritica(regiao1B);
 
     regiao2LD = new Trilho(2124);
     regiao2LD->setCoordenadaInicial(520,40);
@@ -55,9 +62,15 @@ MainWindow::MainWindow(QWidget *parent) :
     regiao2BE->setCoordenadaInicial(420,150);
     regiao2BE->setCoordenadaFinal(310,150);
 
+    trem2->adicionarRegiaoCritica(regiao2LD);
+    trem2->adicionarRegiaoCritica(regiao2BD);
+    trem2->adicionarRegiaoCritica(regiao2BE);
+
     regiao3BE = new Trilho(325);
     regiao3BE->setCoordenadaInicial(670,150);
     regiao3BE->setCoordenadaFinal(560,150);
+
+    trem3->adicionarRegiaoCritica(regiao3BE);
 
     regiao4LD = new Trilho(4124);
     regiao4LD->setCoordenadaInicial(380,150);
@@ -67,9 +80,14 @@ MainWindow::MainWindow(QWidget *parent) :
     regiao4BD->setCoordenadaInicial(400,280);
     regiao4BD->setCoordenadaFinal(290,280);
 
+    trem4->adicionarRegiaoCritica(regiao4LD);
+    trem4->adicionarRegiaoCritica(regiao4BD);
+
     regiao5BE = new Trilho(525);
     regiao5BE->setCoordenadaInicial(540,280);
     regiao5BE->setCoordenadaFinal(400,280);
+
+    trem5->adicionarRegiaoCritica(regiao5BE);
 
 }
 

@@ -2,6 +2,8 @@
 #define TREM_H
 
 #include <QThread>
+#include <QVector>
+#include "trilho.h"
 
 class Trem: public QThread{
     Q_OBJECT
@@ -23,6 +25,7 @@ class Trem: public QThread{
         void setSleep(int newSleep);
         void incrementaSleep();
         void decrementaSleep();
+        void adicionarRegiaoCritica(Trilho *regiao);
 
 
    signals:
@@ -35,6 +38,7 @@ class Trem: public QThread{
         int sleep;
         int velocidade;
         bool stop;
+        QVector<Trilho*> regioesCriticas;
 
 };
 

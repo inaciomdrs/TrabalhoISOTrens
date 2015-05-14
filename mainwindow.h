@@ -87,6 +87,7 @@ public:
     Trem *trem5;
     Trem *trem6;
 
+    Trilho *regiao1LD;
     Trilho *regiao1B;
     Trilho *regiao2LD;
     Trilho *regiao2BD;

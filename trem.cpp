@@ -149,3 +149,7 @@ void Trem::finalizar()
 {
     stop = true;
 }
+
+void Trem::adicionarRegiaoCritica(Trilho *regiao){
+    regioesCriticas.push_back(regiao);
+}
