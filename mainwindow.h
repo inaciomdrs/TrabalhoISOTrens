@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "trem.h"
 
+// Mudança de Renno
+
 namespace Ui {
 class MainWindow;
 }
