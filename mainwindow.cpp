@@ -30,6 +30,29 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(trem5,SIGNAL(updateGUI(int,int,int)),SLOT(updateInterface(int,int,int)));
 
     connect(trem6,SIGNAL(updateGUI(int,int,int)),SLOT(updateInterface(int,int,int)));
+
+    // LEGENDA
+    // =================================================================================
+    // "regiao" ~> é a região crítica
+    // "[1-5]" ~> é o retangulo, contando de cima para baixo, da direita para a esquerda
+    // "B" ~> Baixo
+    // "L" ~> Lado
+    // "[D,E]" ~> Direita e Esquerda
+
+    regiao1B = new Trilho(12);
+
+    regiao2LD = new Trilho(2124);
+    regiao2BD = new Trilho(224);
+    regiao2BE = new Trilho(225);
+
+    regiao3BE = new Trilho(325);
+
+    regiao4LD = new Trilho(4124);
+    regiao4BD = new Trilho(424);
+
+    regiao5BE = new Trilho(525);
+
+
 }
 
 void MainWindow::updateInterface(int id, int x, int y)

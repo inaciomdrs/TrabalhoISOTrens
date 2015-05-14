@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
@@ -32,9 +33,9 @@
    <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>80</x>
       <y>150</y>
-      <width>231</width>
+      <width>211</width>
       <height>21</height>
      </rect>
     </property>
@@ -78,7 +79,7 @@
       <x>60</x>
       <y>60</y>
       <width>21</width>
-      <height>91</height>
+      <height>111</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -240,7 +241,7 @@
    <widget class="QLabel" name="label_T5">
     <property name="geometry">
      <rect>
-      <x>400</x>
+      <x>420</x>
       <y>150</y>
       <width>21</width>
       <height>17</height>
@@ -256,7 +257,7 @@
    <widget class="QLabel" name="label_T6">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>310</x>
       <y>280</y>
       <width>21</width>
       <height>17</height>

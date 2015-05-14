@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "trem.h"
+#include "trilho.h"
 
 // Mudança de Renno
 
@@ -85,6 +86,17 @@ public:
     Trem *trem4;
     Trem *trem5;
     Trem *trem6;
+
+    Trilho *regiao1B;
+    Trilho *regiao2LD;
+    Trilho *regiao2BD;
+    Trilho *regiao2BE;
+    Trilho *regiao3BE;
+    Trilho *regiao4LD;
+    Trilho *regiao4BD;
+    Trilho *regiao5BE;
+
+
 
 
 };
