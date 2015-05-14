@@ -40,18 +40,36 @@ MainWindow::MainWindow(QWidget *parent) :
     // "[D,E]" ~> Direita e Esquerda
 
     regiao1B = new Trilho(12);
+    regiao1B->setCoordenadaInicial(290,150);
+    regiao1B->setCoordenadaFinal(60,150);
 
     regiao2LD = new Trilho(2124);
+    regiao2LD->setCoordenadaInicial(520,40);
+    regiao2LD->setCoordenadaFinal(540,150);
+
     regiao2BD = new Trilho(224);
+    regiao2BD->setCoordenadaInicial(540,150);
+    regiao2BD->setCoordenadaFinal(420,150);
+
     regiao2BE = new Trilho(225);
+    regiao2BE->setCoordenadaInicial(420,150);
+    regiao2BE->setCoordenadaFinal(310,150);
 
     regiao3BE = new Trilho(325);
+    regiao3BE->setCoordenadaInicial(670,150);
+    regiao3BE->setCoordenadaFinal(560,150);
 
     regiao4LD = new Trilho(4124);
+    regiao4LD->setCoordenadaInicial(380,150);
+    regiao4LD->setCoordenadaFinal(400,280);
+
     regiao4BD = new Trilho(424);
+    regiao4BD->setCoordenadaInicial(400,280);
+    regiao4BD->setCoordenadaFinal(290,280);
 
     regiao5BE = new Trilho(525);
-
+    regiao5BE->setCoordenadaInicial(540,280);
+    regiao5BE->setCoordenadaFinal(400,280);
 
 }
 
