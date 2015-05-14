@@ -17,12 +17,12 @@ SOURCES += main.cpp\
     trem.cpp \
     coordenada.cpp \
     semaforo.cpp \
-    memoria_compartilhada.cpp
+    trilho.cpp
 
 HEADERS  += mainwindow.h \
     trem.h \
     coordenada.h \
     semaforo.h \
-    memoria_compartilhada.h
+    trilho.h
 
 FORMS    += mainwindow.ui
