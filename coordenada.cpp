@@ -5,6 +5,8 @@ Coordenada::Coordenada()
 
 }
 
+Coordenada::Coordenada(int xA ,int yA): x(xA), y(yA){}
+
 int Coordenada::getX(){
 
     return x;

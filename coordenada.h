@@ -6,6 +6,7 @@ class Coordenada
 public:
 
     Coordenada();
+    Coordenada(int,int);
 
     int getX();
     int getY();
