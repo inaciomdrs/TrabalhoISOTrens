@@ -14,9 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    trem.cpp
+    trem.cpp \
+    coordenada.cpp
 
 HEADERS  += mainwindow.h \
-    trem.h
+    trem.h \
+    coordenada.h
 
 FORMS    += mainwindow.ui
