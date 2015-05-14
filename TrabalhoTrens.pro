@@ -15,10 +15,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     trem.cpp \
-    coordenada.cpp
+    coordenada.cpp \
+    semaforo.cpp \
+    memoria_compartilhada.cpp
 
 HEADERS  += mainwindow.h \
     trem.h \
-    coordenada.h
+    coordenada.h \
+    semaforo.h \
+    memoria_compartilhada.h
 
 FORMS    += mainwindow.ui
