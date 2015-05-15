@@ -9,6 +9,7 @@ class Trem: public QThread{
     Q_OBJECT
    public:
         Trem(int, int, int);
+        Trem(int, int, int, int, int, int, int, int, int);
         void run();
         void finalizar();
         int getX();
@@ -32,6 +33,10 @@ class Trem: public QThread{
         void updateGUI(int, int, int);
 
    private:
+        int coordXsup, coordYsup;
+        int coordXdir, coordYdir;
+        int coordXinf, coordYinf;
+
         int x;
         int y;
         int ID;

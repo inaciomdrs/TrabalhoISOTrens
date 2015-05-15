@@ -2,10 +2,19 @@
 #include <QtCore>
 
 
-Trem::Trem (int ID, int x, int y){
+Trem::Trem (int ID, int x, int y, int coordXsup, int coordXdir, int coordXinf, int coordYsup, int coordYdir, int coordYinf){
     this->ID = ID;
     this->x = x;
     this->y = y;
+    this->coordXsup = coordXsup;
+    this->coordXdir = coordXdir;
+    this->coordXinf = coordXinf;
+
+    this->coordYsup = coordYsup;
+    this->coordYdir = coordYdir;
+    this->coordYinf = coordYinf;
+
+
     stop = false;
     velocidade = 50;
     sleep = 50;
@@ -73,71 +82,80 @@ void Trem::decrementaSleep(){
 }
 
 void Trem::mover(){
-    switch(ID){
+    if(y == coordYsup && x < coordXsup)
+       x+=10;
+    else if(x == coordXdir && y < coordYdir)
+       y+=10;
+    else if(y == coordYinf && x > coordXinf)
+       x-=10;
+    else
+       y-=10;
 
-    case 1:
-        if(y == 40 && x < 290)
-            x+=10;
-        else if(x == 290 && y < 150)
-            y+=10;
-        else if(y == 150 && x > 60)
-            x-=10;
-        else
-            y-=10;
-        break;
-    case 2:
-        if(y == 40 && x < 540)
-            x+=10;
-        else if(x == 540 && y < 150)
-            y+=10;
-        else if(y == 150 && x > 290)
-            x-=10;
-        else
-            y-=10;
-        break;
-    case 3:
-        if(y == 40 && x < 790)
-            x+=10;
-        else if(x == 790 && y < 150)
-            y+=10;
-        else if(y == 150 && x > 540)
-            x-=10;
-        else
-            y-=10;
-        break;
-    case 4:
-        if(y == 150 && x < 400)
-            x+=10;
-        else if(x == 400 && y < 280)
-            y+=10;
-        else if(y == 280 && x > 150)
-            x-=10;
-        else
-            y-=10;
-        break;
-    case 5:
-        if(y == 150 && x < 650)
-            x+=10;
-        else if(x == 650 && y < 280)
-            y+=10;
-        else if(y == 280 && x > 400)
-            x-=10;
-        else
-            y-=10;
-        break;
-    case 6:
-        if(y == 280 && x < 520)
-            x+=10;
-        else if(x == 520 && y < 410)
-            y+=10;
-        else if(y == 410 && x > 290)
-            x-=10;
-        else
-            y-=10;
-        break;
-    default:
-        break;
-    }
+//    switch(ID){
+
+//    case 1:
+//        if(y == 40 && x < 290)
+//            x+=10;
+//        } else if(x == 290 && y < 150) {
+//            y+=10;
+//        } else if(y == 150 && x > 60) {
+//            x-=10;
+//         else
+//            y-=10;
+//        break;
+//    case 2:
+//        if(y == 40 && x < 540)
+//            x+=10;
+//        else if(x == 540 && y < 150)
+//            y+=10;
+//        else if(y == 150 && x > 290)
+//            x-=10;
+//        else
+//            y-=10;
+//        break;
+//    case 3:
+//        if(y == 40 && x < 790)
+//            x+=10;
+//        else if(x == 790 && y < 150)
+//            y+=10;
+//        else if(y == 150 && x > 540)
+//            x-=10;
+//        else
+//            y-=10;
+//        break;
+//    case 4:
+//        if(y == 150 && x < 400)
+//            x+=10;
+//        else if(x == 400 && y < 280)
+//            y+=10;
+//        else if(y == 280 && x > 150)
+//            x-=10;
+//        else
+//            y-=10;
+//        break;
+//    case 5:
+//        if(y == 150 && x < 650)
+//            x+=10;
+//        else if(x == 650 && y < 280)
+//            y+=10;
+//        else if(y == 280 && x > 400)
+//            x-=10;
+//        else
+//            y-=10;
+//        break;
+//    case 6:
+//        if(y == 280 && x < 520)
+//            x+=10;
+//        else if(x == 520 && y < 410)
+//            y+=10;
+//        else if(y == 410 && x > 290)
+//            x-=10;
+//        else
+//            y-=10;
+//        break;
+//    default:
+//        break;
+//    }
 }
 
 void Trem::run(){
@@ -147,18 +165,16 @@ void Trem::run(){
 
         Coordenada coordenadaInicial;
         Coordenada coordenadaFinal;
+        int xI, yI;
+        int xF, yF;
 
         for (int trilho = 0; trilho < regioesCriticas.size(); ++trilho) {
             coordenadaInicial = regioesCriticas[trilho]->getCoordenadaInicial();
             coordenadaFinal = regioesCriticas[trilho]->getCoordenadaFinal();
+            xI = coordenadaInicial.getX();
+            yI = coordenadaInicial.getY();
 
-            if((this->x == coordenadaInicial.getX()) && (this->y == coordenadaInicial.getY())){
-                regioesCriticas[trilho]->bloquearTrilho();
-                break;
-            } else if((this->x == coordenadaFinal.getX()) && (this->y == coordenadaFinal.getY())) {
-                regioesCriticas[trilho]->liberarTrilho();
-                break;
-            }
+
 
         }
 
