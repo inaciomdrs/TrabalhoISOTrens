@@ -3,7 +3,8 @@
 
 #include <QThread>
 #include <QVector>
-#include "trilho.h"
+#include <QDebug>
+#include "regiaocritica.h"
 
 class Trem: public QThread{
     Q_OBJECT
@@ -26,7 +27,7 @@ class Trem: public QThread{
         void setSleep(int newSleep);
         void incrementaSleep();
         void decrementaSleep();
-        void adicionarRegiaoCritica(Trilho *regiao);
+        void adicionarRegiaoCritica(RegiaoCritica *regiao);
 
 
    signals:
@@ -43,7 +44,7 @@ class Trem: public QThread{
         int sleep;
         int velocidade;
         bool stop;
-        QVector<Trilho*> regioesCriticas;
+        QVector<RegiaoCritica*> regioesCriticas;
 
         void mover();
 

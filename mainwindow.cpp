@@ -7,17 +7,17 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    trem1 = new Trem (1, 60, 40);
+    trem1 = new Trem (1, 60, 40, 290, 290, 60, 40, 150, 150);
 
-    trem2 = new Trem (2, 310, 40);
+    trem2 = new Trem (2, 310, 40, 540, 540, 290, 40, 150, 150);
 
-    trem3 = new Trem (3, 540, 40);
+    trem3 = new Trem (3, 540, 40, 790, 790, 540, 40, 150, 150);
 
-    trem4 = new Trem (4, 170, 150);
+    trem4 = new Trem (4, 170, 150, 400, 400, 150, 150, 280, 280);
 
-    trem5 = new Trem (5, 420, 150);
+    trem5 = new Trem (5, 420, 150, 650, 650, 400, 150, 280, 280);
 
-    trem6 = new Trem (6, 290, 280);
+    trem6 = new Trem (6, 290, 280, 520, 520, 290, 280, 410, 410);
 
     connect(trem1,SIGNAL(updateGUI(int,int,int)),SLOT(updateInterface(int,int,int)));
 
@@ -39,55 +39,38 @@ MainWindow::MainWindow(QWidget *parent) :
     // "L" ~> Lado
     // "[D,E]" ~> Direita e Esquerda
 
-    regiao1LD = new Trilho(1124);
-    regiao1LD->setCoordenadaInicial(270,40);
-    regiao1LD->setCoordenadaFinal(290,150);
+    // Define as regiões críticas
+    R1D = new RegiaoCritica(14);
+    R1BD = new RegiaoCritica(124);
+    R2BE = new RegiaoCritica(225);
 
-    regiao1B = new Trilho(12);
-    regiao1B->setCoordenadaInicial(290,150);
-    regiao1B->setCoordenadaFinal(60,150);
+    // Define as coordenadas de entrada e saída de cada região crítica
+    R1D->adicionarPontoAcesso(270,40);
+    R1D->adicionarPontoAcesso(270,150);
+    R1D->adicionarPontoAcesso(310,40);
+    R1D->adicionarPontoAcesso(310,150);
 
-    trem1->adicionarRegiaoCritica(regiao1LD);
-    trem1->adicionarRegiaoCritica(regiao1B);
+    R1BD->adicionarPontoAcesso(290,130);
+    R1BD->adicionarPontoAcesso(130,150);
+    R1BD->adicionarPontoAcesso(150,170);
+    R1BD->adicionarPontoAcesso(310,150);
 
-    regiao2LD = new Trilho(2124);
-    regiao2LD->setCoordenadaInicial(520,40);
-    regiao2LD->setCoordenadaFinal(540,150);
+    R2BE->adicionarPontoAcesso(420,150);
+    R2BE->adicionarPontoAcesso(400,170);
+    R2BE->adicionarPontoAcesso(290,130);
+    R2BE->adicionarPontoAcesso(270,150);
 
-    regiao2BD = new Trilho(224);
-    regiao2BD->setCoordenadaInicial(540,150);
-    regiao2BD->setCoordenadaFinal(420,150);
 
-    regiao2BE = new Trilho(225);
-    regiao2BE->setCoordenadaInicial(420,150);
-    regiao2BE->setCoordenadaFinal(310,150);
+   // "Adiciona" as regiões críticas aos trens
+   trem1->adicionarRegiaoCritica(R1D);
+   trem1->adicionarRegiaoCritica(R1BD);
 
-    trem2->adicionarRegiaoCritica(regiao2LD);
-    trem2->adicionarRegiaoCritica(regiao2BD);
-    trem2->adicionarRegiaoCritica(regiao2BE);
+   trem2->adicionarRegiaoCritica(R1D);
+   trem2->adicionarRegiaoCritica(R2BE);
 
-    regiao3BE = new Trilho(325);
-    regiao3BE->setCoordenadaInicial(670,150);
-    regiao3BE->setCoordenadaFinal(560,150);
-
-    trem3->adicionarRegiaoCritica(regiao3BE);
-
-    regiao4LD = new Trilho(4124);
-    regiao4LD->setCoordenadaInicial(380,150);
-    regiao4LD->setCoordenadaFinal(400,280);
-
-    regiao4BD = new Trilho(424);
-    regiao4BD->setCoordenadaInicial(400,280);
-    regiao4BD->setCoordenadaFinal(290,280);
-
-    trem4->adicionarRegiaoCritica(regiao4LD);
-    trem4->adicionarRegiaoCritica(regiao4BD);
-
-    regiao5BE = new Trilho(525);
-    regiao5BE->setCoordenadaInicial(540,280);
-    regiao5BE->setCoordenadaFinal(400,280);
-
-    trem5->adicionarRegiaoCritica(regiao5BE);
+   trem4->adicionarRegiaoCritica(R1D);
+   trem4->adicionarRegiaoCritica(R1BD);
+   trem4->adicionarRegiaoCritica(R2BE);
 
 }
 
@@ -125,6 +108,9 @@ void MainWindow::updateInterface(int id, int x, int y)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete R1D;
+    delete R1BD;
+    delete R2BE;
 }
 
 void MainWindow::on_pushButton_clicked()

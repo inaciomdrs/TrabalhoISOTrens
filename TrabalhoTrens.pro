@@ -17,12 +17,14 @@ SOURCES += main.cpp\
     trem.cpp \
     coordenada.cpp \
     semaforo.cpp \
-    trilho.cpp
+    trilho.cpp \
+    regiaocritica.cpp
 
 HEADERS  += mainwindow.h \
     trem.h \
     coordenada.h \
     semaforo.h \
-    trilho.h
+    trilho.h \
+    regiaocritica.h
 
 FORMS    += mainwindow.ui
