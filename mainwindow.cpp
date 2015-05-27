@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     }
 
-    trem1 = new Trem (listaSemaforos, 1, 60, 40, 290, 290, 60, 40, 150, 150);
+    trem1 = new Trem (listaSemaforos, 1, 80, 40, 290, 290, 60, 40, 150, 150);
 
     trem2 = new Trem (listaSemaforos, 2, 310, 40, 540, 540, 290, 40, 150, 150);
 

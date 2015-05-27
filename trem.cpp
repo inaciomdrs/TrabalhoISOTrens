@@ -1,7 +1,6 @@
 #include "trem.h"
 #include <QtCore>
 
-
 Trem::Trem (Semaforo** list, int ID, int x, int y, int coordXsup, int coordXdir, int coordXinf, int coordYsup, int coordYdir, int coordYinf){
     this->ID = ID;
     this->x = x;
@@ -92,171 +91,112 @@ void Trem::mover(){
         x-=10;
     else
         y-=10;
-
-    //    switch(ID){
-
-    //    case 1:
-    //        if(y == 40 && x < 290)
-    //            x+=10;
-    //        } else if(x == 290 && y < 150) {
-    //            y+=10;
-    //        } else if(y == 150 && x > 60) {
-    //            x-=10;
-    //         else
-    //            y-=10;
-    //        break;
-    //    case 2:
-    //        if(y == 40 && x < 540)
-    //            x+=10;
-    //        else if(x == 540 && y < 150)
-    //            y+=10;
-    //        else if(y == 150 && x > 290)
-    //            x-=10;
-    //        else
-    //            y-=10;
-    //        break;
-    //    case 3:
-    //        if(y == 40 && x < 790)
-    //            x+=10;
-    //        else if(x == 790 && y < 150)
-    //            y+=10;
-    //        else if(y == 150 && x > 540)
-    //            x-=10;
-    //        else
-    //            y-=10;
-    //        break;
-    //    case 4:
-    //        if(y == 150 && x < 400)
-    //            x+=10;
-    //        else if(x == 400 && y < 280)
-    //            y+=10;
-    //        else if(y == 280 && x > 150)
-    //            x-=10;
-    //        else
-    //            y-=10;
-    //        break;
-    //    case 5:
-    //        if(y == 150 && x < 650)
-    //            x+=10;
-    //        else if(x == 650 && y < 280)
-    //            y+=10;
-    //        else if(y == 280 && x > 400)
-    //            x-=10;
-    //        else
-    //            y-=10;
-    //        break;
-    //    case 6:
-    //        if(y == 280 && x < 520)
-    //            x+=10;
-    //        else if(x == 520 && y < 410)
-    //            y+=10;
-    //        else if(y == 410 && x > 290)
-    //            x-=10;
-    //        else
-    //            y-=10;
-    //        break;
-    //    default:
-    //        break;
-    //    }
 }
 
 void Trem::run(){
     while(this->getStop() == false){
         emit updateGUI(ID, x, y);
 
-        if(ID == 4){
-            if((x == 150) && (y == 170)){
-                continue;
-            }
-        }
-
         mover();
 
         switch(ID){
         case 1:
-            if((x == 270) && (y == 40)){ // P1
+            if((x == 280) && (y == 40)){ // P1
                 lista[0]->P();
                 lista[2]->P();
             } else if((x == 130) && (y == 150)){ // Saiu de P3
-                lista[0]->V();
                 lista[2]->V();
+                lista[0]->V();
             }
-            //            } else if((x >= 150) && (x <= 290) && (y == 150)){ // P3
-            //                lista[0]->V();
-            //                lista[2]->P();
-            //            } else if((x == 130) && (y == 150)){ // Saiu de P3
-            //                lista[2]->V();
-            //            }
+
             break;
+
         case 2:
             if((x == 530) && (y == 40)){ // P2
                 lista[1]->P();
                 lista[4]->P();
                 lista[3]->P();
                 lista[0]->P();
-            } else if((x == 310) && (y == 40)){ // Saiu de P3
+            }
+            else if((x == 310) && (y == 40)){ // Saiu de P1
                 if(lista[1]->getContador() == 0){
+                    lista[0]->V();
                     lista[1]->V();
+                    lista[3]->V();
+                    lista[4]->V();
                 }
-                lista[4]->V();
-                lista[3]->V();
-                lista[0]->V();
             }
 
-            //            if((x == 540) && (y >= 40) && (y <= 150)){ // P2
-            //                lista[1]->P();
-            //            } else if((x >= 400) && (x <= 540) && (y == 150)){ // P5
-            //                lista[1]->V();
-            //                lista[4]->P();
-            //            } else if((x == 290) && (x <= 400) && (y == 150)){ // P4
-            //                lista[4]->V();
-            //                lista[3]->P();
-            //            } else if((x == 290) && (y >= 40) && (y <= 150)){ // P1
-            //                lista[3]->V();
-            //                lista[0]->P();
-            //            } else if((x == 290) && (y == 40)){ // Saiu de P1
-            //                lista[0]->V();
-            //            }
-            //            break;
             break;
+
+        case 3:
+
+            if((x == 660) && (y == 150)){
+                lista[5]->P();
+                lista[1]->P();
+            }
+            else if((x == 560) && (y == 40)){
+                if(lista[5]->getContador() == 0){
+                    lista[1]->V();
+                    lista[5]->V();
+                }
+            }
+
+            break;
+
         case 4:
-            if((x == 170) && (y == 150)){ // Posição inicial
+
+            if((x == 150) && (y == 160)){ // Posição inicial
                 lista[2]->P();
                 lista[3]->P();
                 lista[6]->P();
                 lista[7]->P();
-            } else if((x == 150) && (y == 170)){ // P4
-                if(lista[2]->getContador() == 1){
-                    lista[2]->P();
-                    lista[3]->P();
-                    lista[6]->P();
-                    lista[7]->P();
+            }
+            else if ((x == 280) && (y == 280)){ // Saiu de P8
+                if(lista[2]->getContador() == 0){
+                    lista[2]->V();
+                    lista[3]->V();
+                    lista[6]->V();
+                    lista[7]->V();
                 }
-            } else if ((x == 270) && (y == 280)){ // Saiu de P8
-                lista[2]->V();
-                lista[3]->V();
-                lista[6]->V();
-                lista[7]->V();
             }
 
-            //            if((x == 290) && (x <= 400) && (y == 150)){ // P4
-            //                lista[2]->V();
-            //                lista[3]->P();
-            //            } else if((x == 400) && (y >= 150) && (y <= 280)){ // P7
-            //                lista[3]->V();
-            //                lista[6]->P();
-            //            } else if((x == 290) && (x <= 400) && (y == 280)){ // P8
-            //                lista[6]->V();
-            //                lista[7]->P();
-            //            } else if((x == 270) && (y == 280)){ // Saiu de P8
-            //                lista[7]->V();
-            //            } else if((x == 150) && (y == 170)){ // Entrou em P3
-            //                lista[2]->P();
-            //            }
+            break;
+
+        case 5:
+
+            if((x == 530) && (y == 280)){ // Posição inicial
+                lista[8]->P();
+                lista[6]->P();
+                lista[4]->P();
+                lista[5]->P();
+            }
+            else if((x == 650) && (y == 170)){ // Posição inicial
+                if(lista[8]->getContador() == 0){
+                    lista[8]->V();
+                    lista[6]->V();
+                    lista[4]->V();
+                    lista[5]->V();
+                }
+            }
+
+            break;
+
+        case 6:
+
+            if((x == 290) && (y == 290)){ // Posição inicial
+                lista[7]->P();
+                lista[8]->P();
+            }
+            else if((x == 520) && (y == 300)){ // Posição inicial
+                if(lista[7]->getContador() == 0){
+                    lista[8]->V();
+                    lista[7]->V();
+                }
+            }
+
             break;
         }
-
-
         msleep(sleep);
     }
 }
