@@ -2,7 +2,7 @@
 #include <QtCore>
 
 
-Trem::Trem (int ID, int x, int y, int coordXsup, int coordXdir, int coordXinf, int coordYsup, int coordYdir, int coordYinf){
+Trem::Trem (Semaforo** list, int ID, int x, int y, int coordXsup, int coordXdir, int coordXinf, int coordYsup, int coordYdir, int coordYinf){
     this->ID = ID;
     this->x = x;
     this->y = y;
@@ -18,6 +18,8 @@ Trem::Trem (int ID, int x, int y, int coordXsup, int coordXdir, int coordXinf, i
     stop = false;
     velocidade = 10;
     sleep = 100;
+
+    this->lista = list;
 
 }
 
@@ -163,110 +165,49 @@ void Trem::run(){
         emit updateGUI(ID, x, y);
         mover();
 
-        QVector<Coordenada> coordenadas;
-        Coordenada C;
-        bool quebrou = false;
-
         switch(ID){
         case 1:
-            for (int regiao = 0; regiao < regioesCriticas.size(); ++regiao) {
-                coordenadas = regioesCriticas[regiao]->listarCoordenadasCriticas();
-                for (int coord = 0; coord < coordenadas.size(); ++coord) {
-                    C = coordenadas[coord];
-
-                    if((this->x == C.getX()) && (this->y == C.getY())){
-                        if((regiao == 0) && (coord == 0)){
-                            regioesCriticas[0]->bloquearTrilho();
-                            regioesCriticas[1]->bloquearTrilho();
-
-                            qDebug() << "T1 Bloqueou R1D";
-                            qDebug() << "T1 Bloqueou R1BD";
-
-                        } else if((regiao == 0) && (coord == 1)){
-                            //regioesCriticas[0]->liberarTrilho();
-                            qDebug() << "T1 Liberou R1D";
-                        } else if((regiao == 1) && (coord == 1)){
-                            regioesCriticas[0]->liberarTrilho();
-                            regioesCriticas[1]->liberarTrilho();
-                            qDebug() << "T1 Liberou R1D";
-                            qDebug() << "T1 Liberou R1BD";
-                        }
-                    }
-                    quebrou = true;
-                    break;
-                }
-                if(quebrou){
-                    quebrou = false;
-                    break;
-                }
+            if((x == 290) && (y >= 40) && (y <= 150)){ // P1
+                lista[0]->P();
+            } else if((x >= 150) && (x <= 290) && (y == 150)){ // P3
+                lista[0]->V();
+                lista[2]->P();
+            } else if((x == 130) && (y == 150)){ // Saiu de P3
+                lista[2]->V();
             }
             break;
         case 2:
-            for (int regiao = 0; regiao < regioesCriticas.size(); ++regiao) {
-                coordenadas = regioesCriticas[regiao]->listarCoordenadasCriticas();
-                for (int coord = 0; coord < coordenadas.size(); ++coord) {
-                    C = coordenadas[coord];
-
-                    if((this->x == C.getX()) && (this->y == C.getY())){
-                        if((regiao == 0) && (coord == 3)){
-                            regioesCriticas[0]->bloquearTrilho();
-                            qDebug() << "T2 Bloqueou R1D";
-                        } else if((regiao == 0) && (coord == 2)){
-                            regioesCriticas[0]->liberarTrilho();
-                            qDebug() << "T2 Liberou R1D";
-                        } else if((regiao == 1) && (coord == 0)){
-                            regioesCriticas[0]->bloquearTrilho();
-                            regioesCriticas[1]->bloquearTrilho();
-
-                            qDebug() << "T2 Bloqueou R1D";
-                            qDebug() << "T2 Bloqueou R2BE";
-                        } else if((regiao == 1) && (coord == 2)){
-                            regioesCriticas[1]->liberarTrilho();
-                            qDebug() << "T2 Liberou R2BE";
-                        }
-                        quebrou = true;
-                        break;
-                    }
-                    if(quebrou){
-                        quebrou = false;
-                        break;
-                    }
-                }
+            if((x == 540) && (y >= 40) && (y <= 150)){ // P2
+                lista[1]->P();
+            } else if((x >= 400) && (x <= 540) && (y == 150)){ // P5
+                lista[1]->V();
+                lista[4]->P();
+            } else if((x == 290) && (x <= 400) && (y == 150)){ // P4
+                lista[4]->V();
+                lista[3]->P();
+            } else if((x == 290) && (y >= 40) && (y <= 150)){ // P1
+                lista[3]->V();
+                lista[0]->P();
+            } else if((x == 290) && (y == 40)){ // Saiu de P1
+                lista[0]->V();
             }
             break;
         case 4:
-            for (int regiao = 0; regiao < regioesCriticas.size(); ++regiao) {
-                coordenadas = regioesCriticas[regiao]->listarCoordenadasCriticas();
-                for (int coord = 0; coord < coordenadas.size(); ++coord) {
-                    C = coordenadas[coord];
-
-                    if((this->x == C.getX()) && (this->y == C.getY())){
-                        if((regiao == 1) && (coord == 2)){
-                            regioesCriticas[0]->bloquearTrilho();
-                            regioesCriticas[1]->bloquearTrilho();
-                            regioesCriticas[2]->bloquearTrilho();
-
-                            qDebug() << "T4 Bloqueou R1D";
-                            qDebug() << "T4 Bloqueou R1BD";
-                            qDebug() << "T4 Bloqueou R2BE";
-
-                        } else if((regiao == 1) && (coord == 3)){
-                            regioesCriticas[0]->liberarTrilho();
-                            regioesCriticas[1]->liberarTrilho();
-                            qDebug() << "T4 Liberou R1D";
-                            qDebug() << "T4 Liberou R1BD";
-                        } else if((regiao == 2) && (coord == 1)){
-                            regioesCriticas[2]->liberarTrilho();
-                            qDebug() << "T4 Liberou R2BE";
-                        }
-                        quebrou = true;
-                        break;
-                    }
-                    if(quebrou){
-                        quebrou = false;
-                        break;
-                    }
+            if((x == 290) && (x <= 400) && (y == 150)){ // P4
+                if(lista[2]->getContador() == 0){
+                    lista[2]->V();
                 }
+                lista[3]->P();
+            } else if((x == 400) && (y >= 150) && (y <= 280)){ // P7
+                lista[3]->V();
+                lista[6]->P();
+            } else if((x == 290) && (x <= 400) && (y == 280)){ // P8
+                lista[6]->V();
+                lista[7]->P();
+            } else if((x == 270) && (y == 280)){ // Saiu de P8
+                lista[7]->V();
+            } else if((x == 150) && (y == 170)){ // Entrou em P3
+                lista[2]->P();
             }
             break;
         }
@@ -279,8 +220,4 @@ void Trem::run(){
 void Trem::finalizar()
 {
     stop = true;
-}
-
-void Trem::adicionarRegiaoCritica(RegiaoCritica *regiao){
-    regioesCriticas.push_back(regiao);
 }

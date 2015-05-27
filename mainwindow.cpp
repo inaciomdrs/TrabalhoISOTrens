@@ -7,17 +7,24 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    trem1 = new Trem (1, 60, 40, 290, 290, 60, 40, 150, 150);
+    listaSemaforos = new Semaforo*[NUMERO_REGIOES_CRITICAS]; //
 
-    trem2 = new Trem (2, 310, 40, 540, 540, 290, 40, 150, 150);
+    for (int var = 0; var < NUMERO_REGIOES_CRITICAS; ++var) {
+        listaSemaforos[var] = new Semaforo(var,1,0600|IPC_CREAT);
 
-    trem3 = new Trem (3, 540, 40, 790, 790, 540, 40, 150, 150);
+    }
 
-    trem4 = new Trem (4, 170, 150, 400, 400, 150, 150, 280, 280);
+    trem1 = new Trem (listaSemaforos, 1, 60, 40, 290, 290, 60, 40, 150, 150);
 
-    trem5 = new Trem (5, 420, 150, 650, 650, 400, 150, 280, 280);
+    trem2 = new Trem (listaSemaforos, 2, 310, 40, 540, 540, 290, 40, 150, 150);
 
-    trem6 = new Trem (6, 290, 280, 520, 520, 290, 280, 410, 410);
+    trem3 = new Trem (listaSemaforos, 3, 540, 40, 790, 790, 540, 40, 150, 150);
+
+    trem4 = new Trem (listaSemaforos, 4, 170, 150, 400, 400, 150, 150, 280, 280);
+
+    trem5 = new Trem (listaSemaforos, 5, 420, 150, 650, 650, 400, 150, 280, 280);
+
+    trem6 = new Trem (listaSemaforos, 6, 290, 280, 520, 520, 290, 280, 410, 410);
 
     connect(trem1,SIGNAL(updateGUI(int,int,int)),SLOT(updateInterface(int,int,int)));
 
@@ -31,46 +38,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(trem6,SIGNAL(updateGUI(int,int,int)),SLOT(updateInterface(int,int,int)));
 
-    // LEGENDA
-    // =================================================================================
-    // "regiao" ~> é a região crítica
-    // "[1-5]" ~> é o retangulo, contando de cima para baixo, da direita para a esquerda
-    // "B" ~> Baixo
-    // "L" ~> Lado
-    // "[D,E]" ~> Direita e Esquerda
-
-    // Define as regiões críticas
-    R1D = new RegiaoCritica(14);
-    R1BD = new RegiaoCritica(124);
-    R2BE = new RegiaoCritica(225);
-
-    // Define as coordenadas de entrada e saída de cada região crítica
-    R1D->adicionarPontoAcesso(270,40);
-    R1D->adicionarPontoAcesso(270,150);
-    R1D->adicionarPontoAcesso(310,40);
-    R1D->adicionarPontoAcesso(310,150);
-
-    R1BD->adicionarPontoAcesso(290,130);
-    R1BD->adicionarPontoAcesso(130,150);
-    R1BD->adicionarPontoAcesso(150,170);
-    R1BD->adicionarPontoAcesso(310,150);
-
-    R2BE->adicionarPontoAcesso(420,150);
-    R2BE->adicionarPontoAcesso(400,170);
-    R2BE->adicionarPontoAcesso(290,130);
-    R2BE->adicionarPontoAcesso(270,150);
-
-
-   // "Adiciona" as regiões críticas aos trens
-   trem1->adicionarRegiaoCritica(R1D);
-   trem1->adicionarRegiaoCritica(R1BD);
-
-   trem2->adicionarRegiaoCritica(R1D);
-   trem2->adicionarRegiaoCritica(R2BE);
-
-   trem4->adicionarRegiaoCritica(R1D);
-   trem4->adicionarRegiaoCritica(R1BD);
-   trem4->adicionarRegiaoCritica(R2BE);
 
 }
 
@@ -108,9 +75,10 @@ void MainWindow::updateInterface(int id, int x, int y)
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete R1D;
-    delete R1BD;
-    delete R2BE;
+    for (int var = 0; var < NUMERO_REGIOES_CRITICAS; ++var) {
+        delete listaSemaforos[var];
+    }
+    delete listaSemaforos;
 }
 
 void MainWindow::on_pushButton_clicked()

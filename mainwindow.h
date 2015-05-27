@@ -3,7 +3,9 @@
 
 #include <QMainWindow>
 #include "trem.h"
-#include "regiaocritica.h"
+#include "semaforo.h"
+
+#define NUMERO_REGIOES_CRITICAS 9
 
 // Mudança de Renno
 
@@ -80,6 +82,9 @@ private slots:
 
 public:
     Ui::MainWindow *ui;
+    Semaforo **listaSemaforos;
+
+private:
     Trem *trem1;
     Trem *trem2;
     Trem *trem3;
@@ -87,9 +92,7 @@ public:
     Trem *trem5;
     Trem *trem6;
 
-    RegiaoCritica *R1D;
-    RegiaoCritica *R1BD;
-    RegiaoCritica *R2BE;
+
 
 };
 

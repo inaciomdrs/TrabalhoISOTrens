@@ -4,13 +4,14 @@
 #include <QThread>
 #include <QVector>
 #include <QDebug>
-#include "regiaocritica.h"
+
+#include "semaforo.h"
 
 class Trem: public QThread{
     Q_OBJECT
    public:
         Trem(int, int, int);
-        Trem(int, int, int, int, int, int, int, int, int);
+        Trem(Semaforo**, int, int, int, int, int, int, int, int, int);
         void run();
         void finalizar();
         int getX();
@@ -27,7 +28,7 @@ class Trem: public QThread{
         void setSleep(int newSleep);
         void incrementaSleep();
         void decrementaSleep();
-        void adicionarRegiaoCritica(RegiaoCritica *regiao);
+
 
 
    signals:
@@ -44,9 +45,12 @@ class Trem: public QThread{
         int sleep;
         int velocidade;
         bool stop;
-        QVector<RegiaoCritica*> regioesCriticas;
 
         void mover();
+
+        Semaforo **lista;
+
+
 
 };
 
