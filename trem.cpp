@@ -163,52 +163,96 @@ void Trem::mover(){
 void Trem::run(){
     while(this->getStop() == false){
         emit updateGUI(ID, x, y);
+
+        if(ID == 4){
+            if((x == 150) && (y == 170)){
+                continue;
+            }
+        }
+
         mover();
 
         switch(ID){
         case 1:
-            if((x == 290) && (y >= 40) && (y <= 150)){ // P1
+            if((x == 270) && (y == 40)){ // P1
                 lista[0]->P();
-            } else if((x >= 150) && (x <= 290) && (y == 150)){ // P3
-                lista[0]->V();
                 lista[2]->P();
             } else if((x == 130) && (y == 150)){ // Saiu de P3
+                lista[0]->V();
                 lista[2]->V();
             }
+            //            } else if((x >= 150) && (x <= 290) && (y == 150)){ // P3
+            //                lista[0]->V();
+            //                lista[2]->P();
+            //            } else if((x == 130) && (y == 150)){ // Saiu de P3
+            //                lista[2]->V();
+            //            }
             break;
         case 2:
-            if((x == 540) && (y >= 40) && (y <= 150)){ // P2
+            if((x == 530) && (y == 40)){ // P2
                 lista[1]->P();
-            } else if((x >= 400) && (x <= 540) && (y == 150)){ // P5
-                lista[1]->V();
                 lista[4]->P();
-            } else if((x == 290) && (x <= 400) && (y == 150)){ // P4
-                lista[4]->V();
                 lista[3]->P();
-            } else if((x == 290) && (y >= 40) && (y <= 150)){ // P1
-                lista[3]->V();
                 lista[0]->P();
-            } else if((x == 290) && (y == 40)){ // Saiu de P1
+            } else if((x == 310) && (y == 40)){ // Saiu de P3
+                if(lista[1]->getContador() == 0){
+                    lista[1]->V();
+                }
+                lista[4]->V();
+                lista[3]->V();
                 lista[0]->V();
             }
+
+            //            if((x == 540) && (y >= 40) && (y <= 150)){ // P2
+            //                lista[1]->P();
+            //            } else if((x >= 400) && (x <= 540) && (y == 150)){ // P5
+            //                lista[1]->V();
+            //                lista[4]->P();
+            //            } else if((x == 290) && (x <= 400) && (y == 150)){ // P4
+            //                lista[4]->V();
+            //                lista[3]->P();
+            //            } else if((x == 290) && (y >= 40) && (y <= 150)){ // P1
+            //                lista[3]->V();
+            //                lista[0]->P();
+            //            } else if((x == 290) && (y == 40)){ // Saiu de P1
+            //                lista[0]->V();
+            //            }
+            //            break;
             break;
         case 4:
-            if((x == 290) && (x <= 400) && (y == 150)){ // P4
-                if(lista[2]->getContador() == 0){
-                    lista[2]->V();
-                }
-                lista[3]->P();
-            } else if((x == 400) && (y >= 150) && (y <= 280)){ // P7
-                lista[3]->V();
-                lista[6]->P();
-            } else if((x == 290) && (x <= 400) && (y == 280)){ // P8
-                lista[6]->V();
-                lista[7]->P();
-            } else if((x == 270) && (y == 280)){ // Saiu de P8
-                lista[7]->V();
-            } else if((x == 150) && (y == 170)){ // Entrou em P3
+            if((x == 170) && (y == 150)){ // Posição inicial
                 lista[2]->P();
+                lista[3]->P();
+                lista[6]->P();
+                lista[7]->P();
+            } else if((x == 150) && (y == 170)){ // P4
+                if(lista[2]->getContador() == 1){
+                    lista[2]->P();
+                    lista[3]->P();
+                    lista[6]->P();
+                    lista[7]->P();
+                }
+            } else if ((x == 270) && (y == 280)){ // Saiu de P8
+                lista[2]->V();
+                lista[3]->V();
+                lista[6]->V();
+                lista[7]->V();
             }
+
+            //            if((x == 290) && (x <= 400) && (y == 150)){ // P4
+            //                lista[2]->V();
+            //                lista[3]->P();
+            //            } else if((x == 400) && (y >= 150) && (y <= 280)){ // P7
+            //                lista[3]->V();
+            //                lista[6]->P();
+            //            } else if((x == 290) && (x <= 400) && (y == 280)){ // P8
+            //                lista[6]->V();
+            //                lista[7]->P();
+            //            } else if((x == 270) && (y == 280)){ // Saiu de P8
+            //                lista[7]->V();
+            //            } else if((x == 150) && (y == 170)){ // Entrou em P3
+            //                lista[2]->P();
+            //            }
             break;
         }
 
